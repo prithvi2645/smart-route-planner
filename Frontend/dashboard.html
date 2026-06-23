@@ -8,8 +8,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
-
-<body class="page-wrapper">
+<body class="page-wrapper">
   <script>window._activePage = 'dashboard.html';</script>
 
   <div id="navbar-container"></div>
@@ -18,7 +17,10 @@
     <div class="container dashboard">
       <!-- Header -->
       <div class="dash-header">
-        <div class="section-tag">🗺 Route Planner</div>
+        <div class="section-tag">
+          <svg class="icon-svg" style="margin-right:4px" viewBox="0 0 24 24"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+          Route Planner
+        </div>
         <h1 class="dash-title">Find Your Optimal Flight Path</h1>
         <p class="dash-sub">47 airports · 264 routes · Dijkstra's algorithm computes the optimal path instantly.</p>
         <div class="stat-pills" style="margin-top:16px">
@@ -41,7 +43,10 @@
           <div class="search-panel">
             <div class="airports-row">
               <div class="form-group">
-                <label class="form-label">📍 Origin Airport</label>
+                <label class="form-label">
+                  <svg class="icon-svg" style="margin-right:4px" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  Origin Airport
+                </label>
                 <div class="input-wrap">
                   <select class="form-select" id="origin-select"></select>
                   <span class="select-arrow">▾</span>
@@ -54,7 +59,10 @@
               </div>
 
               <div class="form-group">
-                <label class="form-label">✈ Destination Airport</label>
+                <label class="form-label">
+                  <svg class="icon-svg" style="margin-right:4px;fill:currentColor;stroke:none" viewBox="0 0 100 100"><path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" /></svg>
+                  Destination Airport
+                </label>
                 <div class="input-wrap">
                   <select class="form-select" id="dest-select"></select>
                   <span class="select-arrow">▾</span>
@@ -66,24 +74,38 @@
             <div class="optimize-label">Optimise By</div>
             <div class="optimize-grid">
               <button class="opt-btn active" data-opt="distance" id="opt-distance">
-                <span class="opt-btn-icon">📍</span>
+                <span class="opt-btn-icon">
+                  <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </span>
                 <span>Shortest Distance</span>
                 <span class="opt-btn-desc">Minimise km</span>
               </button>
               <button class="opt-btn" data-opt="time" id="opt-time">
-                <span class="opt-btn-icon">⏱</span>
+                <span class="opt-btn-icon">
+                  <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </span>
                 <span>Fastest Time</span>
                 <span class="opt-btn-desc">Minimise hours</span>
               </button>
               <button class="opt-btn" data-opt="cost" id="opt-cost">
-                <span class="opt-btn-icon">💵</span>
+                <span class="opt-btn-icon">
+                  <svg class="icon-svg" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </span>
                 <span>Lowest Cost</span>
                 <span class="opt-btn-desc">Cheapest route</span>
               </button>
+              <button class="opt-btn" data-opt="compare" id="opt-compare">
+                <span class="opt-btn-icon">
+                  <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </span>
+                <span>Compare All</span>
+                <span class="opt-btn-desc">See side-by-side</span>
+              </button>
             </div>
 
-            <button class="btn btn-primary btn-full btn-lg" id="search-btn">
-              ⚡ Find Optimal Route
+            <button class="btn btn-primary btn-full btn-lg" id="search-btn" style="display:flex;align-items:center;justify-content:center;gap:8px">
+              <svg class="icon-svg" style="fill:currentColor;stroke:none" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Find Optimal Route
             </button>
             <div id="same-error"
               style="display:none;font-size:12px;color:var(--danger);text-align:center;margin-top:8px">Origin and
@@ -102,7 +124,10 @@
         <div>
           <div class="map-panel" style="position:sticky;top:80px">
             <div class="map-header">
-              <div class="map-title">🗺 Flight Map</div>
+              <div class="map-title">
+                <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+                Flight Map
+              </div>
               <span class="badge badge-muted" id="map-status">All airports shown</span>
             </div>
             <div id="map-container"></div>
@@ -170,10 +195,11 @@
     // ── Popular routes ───────────────────────────────────────────
     function renderPopular() {
       const container = document.getElementById('popular-routes');
+      const planeSVG = `<svg class="icon-svg" viewBox="0 0 100 100" style="fill:currentColor;stroke:none;width:12px;height:12px;margin-right:4px"><path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" /></svg>`;
       container.innerHTML = POPULAR_ROUTES.map(r => {
         const tagClass = (r.tag === 'National' || r.tag === 'Domestic') ? 'badge-success' : 'badge-purple';
         return `<button class="route-chip" data-from="${r.from}" data-to="${r.to}">
-          ✈ ${r.label} <span class="badge ${tagClass}">${r.tag}</span>
+          ${planeSVG}${r.label} <span class="badge ${tagClass}">${r.tag}</span>
         </button>`;
       }).join('');
 
@@ -193,92 +219,74 @@
     document.getElementById('search-btn').addEventListener('click', doSearch);
 
     async function doSearch() {
-
       const sameErr = document.getElementById('same-error');
-
       if (currentSource === currentDest) {
-
         sameErr.style.display = 'block';
-
         return;
       }
-
       sameErr.style.display = 'none';
 
       const btn = document.getElementById('search-btn');
-
       btn.disabled = true;
-
       btn.innerHTML = '<span class="spinner"></span> Computing optimal route…';
 
       document.getElementById('results-area').innerHTML = `
-    <div class="loading-state">
-      <div class="loading-ring"></div>
-      <div class="loading-text">
-        Running Dijkstra's algorithm across the flight graph…
-      </div>
-    </div>`;
+        <div class="loading-state">
+          <div class="loading-ring"></div>
+          <div class="loading-text">
+            Running Dijkstra's algorithm across the flight graph…
+          </div>
+        </div>`;
 
       setTimeout(async () => {
-
         try {
-
-          const response = await fetch('http://localhost:5000/shortest-path', {
-
-            method: 'POST',
-
-            headers: {
-              'Content-Type': 'application/json'
-            },
-
-            body: JSON.stringify({
-              source: currentSource,
-              destination: currentDest,
-              optimizeBy: currentOpt
-            })
-
-          });
-
-          const data = await response.json();
-
-          currentResult = data;
-
-          renderResults(currentResult);
-
-          updateMap();
-
+          if (currentOpt === 'compare') {
+            const opts = ['distance', 'time', 'cost'];
+            const promises = opts.map(opt =>
+              fetch('http://localhost:5000/shortest-path', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ source: currentSource, destination: currentDest, optimizeBy: opt })
+              }).then(r => r.json())
+            );
+            const results = await Promise.all(promises);
+            renderComparison(results);
+          } else {
+            const response = await fetch('http://localhost:5000/shortest-path', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ source: currentSource, destination: currentDest, optimizeBy: currentOpt })
+            });
+            const data = await response.json();
+            currentResult = data;
+            renderResults(currentResult);
+            updateMap();
+          }
         } catch (error) {
-
           console.error(error);
-
           alert('Failed to fetch route from backend');
-
         } finally {
-
           btn.disabled = false;
-
-          btn.innerHTML = '⚡ Find Optimal Route';
+          btn.innerHTML = `<svg class="icon-svg" style="fill:currentColor;stroke:none" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Find Optimal Route`;
         }
-
       }, 600);
-    };
+    }
+
     function clearResults() {
-
       currentResult = null;
-
       document.getElementById('results-area').innerHTML = '';
-
       document.getElementById('same-error').style.display = 'none';
-
       updateMap();
-    };
+    }
 
     // ── Render results ───────────────────────────────────────────
     function renderResults(result) {
       const area = document.getElementById('results-area');
       if (!result.found) {
         area.innerHTML = `<div class="card" style="margin-top:16px;text-align:center;padding:36px">
-          <div class="no-route-icon">✈</div>
+          <div class="no-route-icon">
+            <svg class="icon-svg" viewBox="0 0 100 100" style="width:24px;height:24px;fill:var(--danger);stroke:none"><path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" /></svg>
+          </div>
           <div style="font-weight:700;font-size:15px;margin-bottom:6px">No Route Found</div>
           <div style="font-size:13px;color:var(--muted)">There's no connected path between ${currentSource} and ${currentDest} in the current network.</div>
         </div>`;
@@ -286,12 +294,17 @@
       }
 
       const segCount = result.steps.length;
+      const planeMetaSVG = `<svg class="icon-svg" viewBox="0 0 100 100" style="fill:currentColor;stroke:none;width:12px;height:12px;margin-right:4px"><path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" /></svg>`;
+      
       const stepsHTML = result.steps.map((step, i) => `
         <div class="segment-row">
           <div class="segment-num">${i + 1}</div>
           <div class="segment-info">
             <div class="segment-route">${step.fromName} → ${step.toName}</div>
-            <div class="segment-meta">✈ ${step.airline} · ${step.aircraft}</div>
+            <div class="segment-meta" style="display:flex;align-items:center;margin-top:2px">
+              ${planeMetaSVG}
+              ${step.airline} · ${step.aircraft}
+            </div>
           </div>
           <div class="segment-stats">
             <div class="seg-stat"><div class="seg-stat-val">${step.distance.toLocaleString()} km</div><div class="seg-stat-lbl">dist</div></div>
@@ -309,17 +322,23 @@
         <div style="margin-top:16px;display:flex;flex-direction:column;gap:12px">
           <div class="stat-cards">
             <div class="stat-card">
-              <div class="stat-icon">📍</div>
+              <div class="stat-icon" style="display:flex;justify-content:center;margin-bottom:6px">
+                <svg class="icon-svg" style="width:22px;height:22px" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
               <div class="stat-value">${result.totalDistance.toLocaleString()} km</div>
               <div class="stat-label">Total Distance</div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon">⏱</div>
+              <div class="stat-icon" style="display:flex;justify-content:center;margin-bottom:6px">
+                <svg class="icon-svg" style="width:22px;height:22px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
               <div class="stat-value">${formatTime(result.totalTime)}</div>
               <div class="stat-label">Total Time</div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon">💵</div>
+              <div class="stat-icon" style="display:flex;justify-content:center;margin-bottom:6px">
+                <svg class="icon-svg" style="width:22px;height:22px" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
               <div class="stat-value">$${result.totalCost.toLocaleString()}</div>
               <div class="stat-label">Total Cost</div>
             </div>
@@ -327,13 +346,185 @@
 
           <div class="route-path-card">
             <div class="route-path-header">
-              <span style="font-size:18px">🛣</span>
+              <span style="display:flex;align-items:center">
+                <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/><path d="M12 3v18" stroke-dasharray="4"/></svg>
+              </span>
               <span class="route-path-title">Optimal Route</span>
               <span class="badge badge-primary">${segCount} segment${segCount > 1 ? 's' : ''}</span>
             </div>
             <div class="route-path-nodes">${nodesHTML}</div>
             <div class="segment-list">${stepsHTML}</div>
           </div>
+        </div>`;
+    }
+
+    // ── Comparison rendering ─────────────────────────────────────
+    function renderComparison(results) {
+      const [distRes, timeRes, costRes] = results;
+      const area = document.getElementById('results-area');
+      
+      if (!distRes.found && !timeRes.found && !costRes.found) {
+        area.innerHTML = `<div class="card" style="margin-top:16px;text-align:center;padding:36px">
+          <div class="no-route-icon">
+            <svg class="icon-svg" viewBox="0 0 100 100" style="width:24px;height:24px;fill:var(--danger);stroke:none"><path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" /></svg>
+          </div>
+          <div style="font-weight:700;font-size:15px;margin-bottom:6px">No Route Found</div>
+          <div style="font-size:13px;color:var(--muted)">There's no connected path between ${currentSource} and ${currentDest} in the current network.</div>
+        </div>`;
+        return;
+      }
+
+      const defaultRes = distRes.found ? distRes : timeRes.found ? timeRes : costRes.found ? costRes : null;
+      currentResult = defaultRes;
+      updateMap();
+
+      const cols = [
+        { title: 'Shortest Distance', key: 'distance', res: distRes, icon: `<svg class="icon-svg" style="width:14px;height:14px;margin-right:4px" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>` },
+        { title: 'Fastest Time', key: 'time', res: timeRes, icon: `<svg class="icon-svg" style="width:14px;height:14px;margin-right:4px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>` },
+        { title: 'Lowest Cost', key: 'cost', res: costRes, icon: `<svg class="icon-svg" style="width:14px;height:14px;margin-right:4px" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>` }
+      ];
+
+      const colHTML = cols.map(c => {
+        if (!c.res.found) {
+          return `
+            <div class="comp-card">
+              <div class="comp-header">
+                <div class="comp-title">${c.icon}${c.title}</div>
+                <div class="comp-subtitle">No path available</div>
+              </div>
+              <div style="text-align:center;color:var(--muted);padding:24px;font-size:13px">
+                Unreachable
+              </div>
+            </div>`;
+        }
+
+        const isCurrentlyDrawn = currentResult && currentResult.totalDistance === c.res.totalDistance && currentResult.totalTime === c.res.totalTime && currentResult.totalCost === c.res.totalCost;
+        const activeClass = isCurrentlyDrawn ? 'active-selection' : '';
+
+        return `
+          <div class="comp-card ${activeClass}" id="comp-card-${c.key}">
+            <div class="comp-header">
+              <div class="comp-title">${c.icon}${c.title}</div>
+              <div class="comp-subtitle">${c.res.steps.length} segment${c.res.steps.length > 1 ? 's' : ''}</div>
+            </div>
+            <div class="comp-stats">
+              <div class="comp-stat-row">
+                <span class="comp-stat-label">
+                  <svg class="icon-svg" style="width:12px;height:12px" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  Distance:
+                </span>
+                <span class="comp-stat-value">${c.res.totalDistance.toLocaleString()} km</span>
+              </div>
+              <div class="comp-stat-row">
+                <span class="comp-stat-label">
+                  <svg class="icon-svg" style="width:12px;height:12px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Time:
+                </span>
+                <span class="comp-stat-value">${formatTime(c.res.totalTime)}</span>
+              </div>
+              <div class="comp-stat-row">
+                <span class="comp-stat-label">
+                  <svg class="icon-svg" style="width:12px;height:12px" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                  Cost:
+                </span>
+                <span class="comp-stat-value">$${c.res.totalCost.toLocaleString()}</span>
+              </div>
+            </div>
+            <div class="comp-path">
+              ${c.res.path.map((p, idx) => `
+                <span>${p}</span>
+                ${idx < c.res.path.length - 1 ? '<span class="comp-path-arrow">→</span>' : ''}
+              `).join('')}
+            </div>
+            <button class="btn btn-outline btn-sm comp-btn" onclick="selectCompareRoute('${c.key}')" ${isCurrentlyDrawn ? 'disabled' : ''}>
+              ${isCurrentlyDrawn ? 'Showing on Map' : 'Select & Draw on Map'}
+            </button>
+          </div>`;
+      }).join('');
+
+      area.innerHTML = `
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:16px">
+          <div class="section-tag" style="margin-bottom:0">
+            <svg class="icon-svg" style="margin-right:4px" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Side-by-Side Comparison
+          </div>
+          <div class="comparison-grid">
+            ${colHTML}
+          </div>
+          <div id="compare-detailed-view"></div>
+        </div>`;
+
+      window.currentComparisonResults = results;
+      renderDetailedComparisonView(defaultRes);
+    }
+
+    window.selectCompareRoute = function(key) {
+      const results = window.currentComparisonResults;
+      if (!results) return;
+      const [distRes, timeRes, costRes] = results;
+      let selected = null;
+      if (key === 'distance') selected = distRes;
+      else if (key === 'time') selected = timeRes;
+      else if (key === 'cost') selected = costRes;
+      
+      if (!selected || !selected.found) return;
+      
+      currentResult = selected;
+      updateMap();
+      
+      document.querySelectorAll('.comp-card').forEach(card => card.classList.remove('active-selection'));
+      const activeCard = document.getElementById(`comp-card-${key}`);
+      if (activeCard) activeCard.classList.add('active-selection');
+      
+      const keys = ['distance', 'time', 'cost'];
+      document.querySelectorAll('.comp-btn').forEach((btn, idx) => {
+        const currentKey = keys[idx];
+        if (currentKey === key) {
+          btn.textContent = 'Showing on Map';
+          btn.disabled = true;
+        } else {
+          btn.textContent = 'Select & Draw on Map';
+          btn.disabled = false;
+        }
+      });
+
+      renderDetailedComparisonView(selected);
+    };
+
+    function renderDetailedComparisonView(result) {
+      const container = document.getElementById('compare-detailed-view');
+      if (!container || !result || !result.found) return;
+
+      const segCount = result.steps.length;
+      const planeMetaSVG = `<svg class="icon-svg" viewBox="0 0 100 100" style="fill:currentColor;stroke:none;width:12px;height:12px;margin-right:4px"><path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" /></svg>`;
+      
+      const stepsHTML = result.steps.map((step, i) => `
+        <div class="segment-row">
+          <div class="segment-num">${i + 1}</div>
+          <div class="segment-info">
+            <div class="segment-route">${step.fromName} → ${step.toName}</div>
+            <div class="segment-meta" style="display:flex;align-items:center;margin-top:2px">
+              ${planeMetaSVG}
+              ${step.airline} · ${step.aircraft}
+            </div>
+          </div>
+          <div class="segment-stats">
+            <div class="seg-stat"><div class="seg-stat-val">${step.distance.toLocaleString()} km</div><div class="seg-stat-lbl">dist</div></div>
+            <div class="seg-stat"><div class="seg-stat-val">${formatTime(step.time)}</div><div class="seg-stat-lbl">time</div></div>
+            <div class="seg-stat"><div class="seg-stat-val">$${step.cost.toLocaleString()}</div><div class="seg-stat-lbl">cost</div></div>
+          </div>
+        </div>`).join('');
+
+      container.innerHTML = `
+        <div class="route-path-card" style="margin-top:12px">
+          <div class="route-path-header">
+            <span style="display:flex;align-items:center">
+              <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/><path d="M12 3v18" stroke-dasharray="4"/></svg>
+            </span>
+            <span class="route-path-title">Selected Route Segments</span>
+            <span class="badge badge-primary">${segCount} segment${segCount > 1 ? 's' : ''}</span>
+          </div>
+          <div class="segment-list">${stepsHTML}</div>
         </div>`;
     }
 
@@ -361,5 +552,4 @@
     });
   </script>
 </body>
-
 </html>

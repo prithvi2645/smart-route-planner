@@ -16,7 +16,11 @@ function applyTheme(t) {
   document.documentElement.setAttribute('data-theme', t);
   localStorage.setItem('skyroute_theme', t);
   const icon = document.getElementById('theme-icon');
-  if (icon) icon.textContent = t === 'dark' ? '☀' : '🌙';
+  if (icon) {
+    icon.innerHTML = t === 'dark'
+      ? `<svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`
+      : `<svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+  }
 }
 function toggleTheme() {
   const t = getTheme() === 'dark' ? 'light' : 'dark';
@@ -39,16 +43,23 @@ function buildNavbar(activePage) {
   const authSection = user
     ? `<div class="nav-profile-wrap">
         <button class="nav-profile-btn" onclick="toggleProfileMenu()" id="profile-trigger">
-          <span class="nav-avatar">✈</span>
+          <span class="nav-avatar" style="display:flex;align-items:center;justify-content:center">
+            <svg class="icon-svg" style="width:12px;height:12px;stroke-width:2.5px" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
           <span class="nav-username">${user.name.split(' ')[0]}</span>
-          <span class="nav-chevron" id="profile-chevron">▾</span>
+          <span class="nav-chevron" id="profile-chevron" style="display:flex;align-items:center">
+            <svg class="icon-svg" style="width:10px;height:10px" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
         </button>
         <div class="profile-dropdown hidden" id="profile-dropdown">
           <div class="dropdown-header">
             <div class="dropdown-name">${user.name}</div>
             <div class="dropdown-email">${user.email}</div>
           </div>
-          <button class="dropdown-item danger" onclick="logout()">✕ Sign Out</button>
+          <button class="dropdown-item danger" onclick="logout()" style="display:flex;align-items:center;gap:6px">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Sign Out
+          </button>
         </div>
        </div>`
     : `<div class="nav-auth">
@@ -56,17 +67,19 @@ function buildNavbar(activePage) {
         <a href="signup.html" class="btn btn-primary btn-sm">Get Started</a>
        </div>`;
 
+  const brandPlane = `<svg class="icon-svg" viewBox="0 0 100 100" style="width:18px;height:18px;stroke:none;fill:#fff"><path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" /></svg>`;
+
   return `
     <nav class="navbar" id="navbar">
       <div class="container nav-inner">
         <a href="index.html" class="nav-brand">
-          <div class="brand-icon">✈</div>
+          <div class="brand-icon">${brandPlane}</div>
           Sky<span class="text-primary">Route</span>
         </a>
         <div class="nav-links" id="nav-links">${links}</div>
         <div class="nav-right">
           <button class="btn-icon" onclick="toggleTheme()" title="Toggle theme">
-            <span id="theme-icon">${getTheme() === 'dark' ? '☀' : '🌙'}</span>
+            <span id="theme-icon" style="display:flex;align-items:center;justify-content:center"></span>
           </button>
           ${authSection}
           <button class="btn-icon mobile-menu-btn" onclick="toggleMobileMenu()" id="mobile-toggle">☰</button>
@@ -75,7 +88,10 @@ function buildNavbar(activePage) {
       <div class="mobile-menu hidden" id="mobile-menu">
         ${pages.map(p => `<a href="${p.href}" class="mobile-link${activePage === p.href ? ' active' : ''}">${p.label}</a>`).join('')}
         ${user
-          ? `<button class="mobile-link danger" onclick="logout()">Sign Out</button>`
+          ? `<button class="mobile-link danger" onclick="logout()" style="display:flex;align-items:center;gap:6px">
+              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+             </button>`
           : `<a href="login.html" class="mobile-link">Log In</a><a href="signup.html" class="mobile-link primary">Get Started</a>`
         }
       </div>
@@ -104,11 +120,12 @@ document.addEventListener('click', e => {
 
 // ── Footer ────────────────────────────────────────────────────
 function buildFooter() {
+  const brandPlane = `<svg class="icon-svg" viewBox="0 0 100 100" style="width:14px;height:14px;stroke:none;fill:#fff"><path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" /></svg>`;
   return `
     <footer class="footer">
       <div class="container footer-inner">
         <div class="footer-brand">
-          <div class="brand-icon sm">✈</div>
+          <div class="brand-icon sm">${brandPlane}</div>
           <span>Sky<span class="text-primary">Route</span></span>
         </div>
         <p class="footer-copy">© ${new Date().getFullYear()} SkyRoute. Powered by Dijkstra's algorithm · 47 airports · 264 routes.</p>
@@ -168,7 +185,14 @@ function initMap(containerId, result, sourceId, destId) {
       L.polyline(pts, { color: PRIMARY, weight: 8, opacity: 0.1 }).addTo(leafletMap);
       L.polyline(pts, { color: PRIMARY, weight: 2.5, opacity: 0.9, dashArray: '10 5', lineCap: 'round' }).addTo(leafletMap);
       const mid = pts[Math.floor(pts.length / 2)];
-      L.marker(mid, { icon: L.divIcon({ html: `<span style="color:${PRIMARY};font-size:14px">✈</span>`, className:'', iconSize:[14,14], iconAnchor:[7,7] }) }).addTo(leafletMap);
+      L.marker(mid, {
+        icon: L.divIcon({
+          html: `<svg class="icon-svg" viewBox="0 0 100 100" style="width:16px;height:16px;fill:${PRIMARY};stroke:none;transform:rotate(45deg)"><path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" /></svg>`,
+          className: '',
+          iconSize: [16, 16],
+          iconAnchor: [8, 8]
+        })
+      }).addTo(leafletMap);
     }
   }
 
@@ -236,11 +260,161 @@ function buildAirportOptions(selectedId) {
   }).join('');
 }
 
+// ── Custom Cursor Trail (Sunset Airplane Spotter) ───────────
+function initCustomCursor() {
+  if (window.matchMedia('(pointer: coarse)').matches) return; // Skip mobile/touch
+
+  const plane = document.createElement('div');
+  plane.id = 'custom-cursor-plane';
+  plane.className = 'custom-cursor-plane';
+  plane.innerHTML = `<svg viewBox="0 0 100 100" style="fill:currentColor;stroke:none;width:100%;height:100%"><path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" /></svg>`;
+  document.body.appendChild(plane);
+
+  const light = document.createElement('div');
+  light.id = 'custom-cursor-light';
+  light.className = 'custom-cursor-light';
+  document.body.appendChild(light);
+
+  const canvas = document.createElement('canvas');
+  canvas.id = 'cursor-trail-canvas';
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  let mouseX = null;
+  let mouseY = null;
+  let planeX = null;
+  let planeY = null;
+  let planeAngle = 0;
+  const trailPoints = [];
+
+  window.addEventListener('mousemove', e => {
+    if (mouseX === null) {
+      planeX = e.clientX;
+      planeY = e.clientY;
+    }
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  document.addEventListener('mouseleave', () => {
+    mouseX = null;
+    mouseY = null;
+  });
+
+  function tick() {
+    if (mouseX !== null && planeX !== null) {
+      const ease = 0.08;
+      const dx = mouseX - planeX;
+      const dy = mouseY - planeY;
+      const dist = Math.hypot(dx, dy);
+
+      planeX += dx * ease;
+      planeY += dy * ease;
+
+      if (dist > 1.5) {
+        const targetAngle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
+        let diff = targetAngle - planeAngle;
+        while (diff < -180) diff += 360;
+        while (diff > 180) diff -= 360;
+        planeAngle += diff * 0.12;
+      }
+
+      plane.style.transform = `translate3d(${planeX}px, ${planeY}px, 0) rotate(${planeAngle}deg)`;
+      light.style.transform = `translate3d(${planeX}px, ${planeY}px, 0)`;
+
+      trailPoints.push({ x: planeX, y: planeY, time: Date.now() });
+    }
+
+    const now = Date.now();
+    while (trailPoints.length > 0 && now - trailPoints[0].time > 800) {
+      trailPoints.shift();
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (trailPoints.length > 1) {
+      for (let i = 1; i < trailPoints.length; i++) {
+        const p1 = trailPoints[i - 1];
+        const p2 = trailPoints[i];
+        const age = now - p1.time;
+        const pct = 1 - (age / 800);
+        if (pct <= 0) continue;
+
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+
+        ctx.lineWidth = 1 + pct * 4;
+        const alpha = pct * 0.45;
+
+        let r, g, b;
+        if (pct > 0.5) {
+          const t = (pct - 0.5) * 2;
+          r = 255;
+          g = Math.floor(107 + (123 * t));
+          b = Math.floor(53 + (97 * t));
+        } else {
+          const t = pct * 2;
+          r = Math.floor(139 + (116 * t));
+          g = Math.floor(92 + (15 * t));
+          b = Math.floor(246 - (193 * t));
+        }
+
+        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.stroke();
+      }
+    }
+
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  const interactives = 'a, button, select, input, textarea, [role="button"], .swap-btn, .opt-btn, .route-chip';
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest(interactives)) {
+      plane.classList.add('hovering');
+    }
+  });
+
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest(interactives)) {
+      plane.classList.remove('hovering');
+    }
+  });
+
+  window.addEventListener('click', e => {
+    const particle = document.createElement('div');
+    particle.className = 'custom-cursor-click-particle';
+    particle.style.left = e.clientX + 'px';
+    particle.style.top = e.clientY + 'px';
+    particle.style.width = '20px';
+    particle.style.height = '20px';
+    document.body.appendChild(particle);
+
+    setTimeout(() => {
+      particle.remove();
+    }, 500);
+  });
+}
+
 // ── Init ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   applyTheme(getTheme());
   const navEl = document.getElementById('navbar-container');
   const footEl = document.getElementById('footer-container');
-  if (navEl) navEl.outerHTML = buildNavbar(window._activePage || 'index.html');
+  if (navEl) {
+    navEl.outerHTML = buildNavbar(window._activePage || 'index.html');
+    applyTheme(getTheme());
+  }
   if (footEl) footEl.outerHTML = buildFooter();
+  initCustomCursor();
 });

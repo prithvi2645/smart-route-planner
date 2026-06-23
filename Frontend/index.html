@@ -12,11 +12,30 @@
   <div id="navbar-container"></div>
 
   <main>
-    <!-- Hero -->
     <section class="hero">
-      <div class="hero-bg"></div>
+      <video class="hero-video-bg" autoplay muted loop playsinline>
+        <source src="hero.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
       <div class="container hero-content">
-        <div class="hero-tag">✈ Powered by Dijkstra's Algorithm</div>
+        <!-- Floating brand title + mini plane -->
+        <div class="hero-brand-floating-wrapper">
+          <div class="hero-brand-floating">
+            <span class="brand-sky">Sky</span><span class="brand-route">Route</span>
+            <div class="floating-mini-plane">
+              <svg viewBox="0 0 100 100" style="fill:currentColor;stroke:none;width:100%;height:100%;">
+                <path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-tag" style="margin-top: 16px;">
+          <svg class="icon-svg" style="fill:currentColor;stroke:none;width:12px;height:12px;margin-right:4px" viewBox="0 0 100 100">
+            <path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" />
+          </svg>
+          Powered by Dijkstra's Algorithm
+        </div>
         <h1 class="hero-title">
           Plan Smarter<br><span class="text-primary">Flight Routes</span>
         </h1>
@@ -25,38 +44,11 @@
           optimise by distance, time, or cost.
         </p>
         <div class="hero-actions">
-          <a href="dashboard.html" class="btn btn-primary btn-lg">🗺 Start Planning</a>
+          <a href="dashboard.html" class="btn btn-primary btn-lg">
+            <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+            Start Planning
+          </a>
           <a href="signup.html" class="btn btn-outline btn-lg">Create Free Account</a>
-        </div>
-
-        <div class="hero-visual">
-          <div class="hero-card">
-            <div class="hero-route-display">
-              <div class="hero-airport">
-                <div class="hero-airport-code">JFK</div>
-                <div class="hero-airport-name">New York</div>
-              </div>
-              <div class="hero-arrow">→</div>
-              <div class="hero-airport">
-                <div class="hero-airport-code">SIN</div>
-                <div class="hero-airport-name">Singapore</div>
-              </div>
-            </div>
-            <div class="hero-route-path">
-              <span class="hero-node start">JFK</span>
-              <span class="hero-dash">───</span>
-              <span class="hero-node">LHR</span>
-              <span class="hero-dash">───</span>
-              <span class="hero-node">DXB</span>
-              <span class="hero-dash">───</span>
-              <span class="hero-node end">SIN</span>
-            </div>
-            <div style="display:flex;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
-              <span class="badge badge-primary">📍 15,887 km</span>
-              <span class="badge badge-success">⏱ 19h 45m</span>
-              <span class="badge badge-orange">💵 $2,090</span>
-            </div>
-          </div>
         </div>
 
         <!-- Network stats -->
@@ -71,6 +63,18 @@
       </div>
     </section>
 
+    <!-- Scroll flight curve path animation -->
+    <div class="scroll-flight-container">
+      <svg class="scroll-flight-path-svg" viewBox="0 0 1440 260" preserveAspectRatio="none">
+        <path d="M-100,130 C300,30 600,220 1080,80 C1250,30 1540,130 1540,130" fill="none" stroke="var(--primary-20)" stroke-width="2.5" stroke-dasharray="6 8" />
+      </svg>
+      <div class="scroll-flight-plane" id="scroll-flight-plane">
+        <svg viewBox="0 0 100 100" style="fill:currentColor;stroke:none;transform:rotate(90deg)">
+          <path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" />
+        </svg>
+      </div>
+    </div>
+
     <!-- Features -->
     <section class="features">
       <div class="container">
@@ -78,32 +82,44 @@
         <h2 class="section-title">Everything you need to plan the perfect route</h2>
         <div class="features-grid">
           <div class="feature-card">
-            <div class="feature-icon">🧮</div>
+            <div class="feature-icon">
+              <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="18" cy="4" r="3"/><circle cx="6" cy="9" r="3"/><circle cx="18" cy="9" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="10.5" x2="15" y2="16.5"/><line x1="18" y1="7" x2="18" y2="6"/><line x1="6" y1="12" x2="6" y2="15"/><line x1="18" y1="12" x2="18" y2="15"/></svg>
+            </div>
             <div class="feature-title">Dijkstra's Algorithm</div>
-            <div class="feature-desc">Guaranteed-optimal shortest path computed in milliseconds across a weighted flight graph.</div>
+            <div class="feature-desc">Guaranteed-optimal shortest path computed in milliseconds across a flight route database.</div>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">🌍</div>
+            <div class="feature-icon">
+              <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
             <div class="feature-title">Global Coverage</div>
             <div class="feature-desc">47 airports spanning North America, Europe, Middle East, Africa, Asia, and Oceania.</div>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">🗺</div>
+            <div class="feature-icon">
+              <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+            </div>
             <div class="feature-title">Interactive Map</div>
             <div class="feature-desc">Great-circle arc routes drawn on a live Leaflet map with airport markers and popups.</div>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">⚙</div>
-            <div class="feature-title">3 Optimisation Modes</div>
-            <div class="feature-desc">Optimise your route by shortest distance, fastest time, or lowest ticket cost.</div>
+            <div class="feature-icon">
+              <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </div>
+            <div class="feature-title">Multi-Mode Comparison</div>
+            <div class="feature-desc">Compare routes side-by-side by shortest distance, fastest time, or lowest ticket cost.</div>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">✈</div>
+            <div class="feature-icon">
+              <svg class="icon-svg" viewBox="0 0 100 100" style="fill:currentColor;stroke:none"><path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" /></svg>
+            </div>
             <div class="feature-title">18 Airlines</div>
             <div class="feature-desc">Routes operated by Emirates, Singapore Airlines, Qantas, IndiGo, AirAsia, and 13 more.</div>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">🌙</div>
+            <div class="feature-icon">
+              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </div>
             <div class="feature-title">Dark & Light Mode</div>
             <div class="feature-desc">Full dark mode support with persisted preference and matching map tile layers.</div>
           </div>
@@ -143,6 +159,25 @@
             <div style="font-size:11px;color:var(--subtle);margin-top:6px">Americas · Europe · Asia · Oceania…</div>
           </div>
         </div>
+
+        <!-- Network Simulation Visualizer -->
+        <div class="network-simulator-panel">
+          <div class="simulator-header">
+            <div class="simulator-status">
+              <span class="status-pulse"></span>
+              Live Route Traffic Simulator
+            </div>
+            <div class="simulator-legend">
+              <span style="color:#0ea5e9">● Hubs</span>
+              <span style="color:#8b5cf6">● Intl</span>
+              <span style="color:#10b981">● National</span>
+            </div>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="network-simulator-canvas"></canvas>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -166,5 +201,299 @@
   <script src="js/data.js"></script>
   <script src="js/dijkstra.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    // ── Hero 3D Parallax Logo ──────────────────────────────────
+    function initHeroParallax() {
+      const hero = document.querySelector('.hero');
+      const logo = document.querySelector('.hero-brand-floating');
+      if (!hero || !logo) return;
+
+      hero.addEventListener('mousemove', e => {
+        const rect = hero.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        const ax = x / (rect.width / 2);
+        const ay = y / (rect.height / 2);
+        
+        const tiltX = -ay * 12;
+        const tiltY = ax * 16;
+        
+        logo.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(15px)`;
+      });
+
+      hero.addEventListener('mouseleave', () => {
+        logo.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0)';
+      });
+    }
+
+    // ── Scroll Flight Path Animation ───────────────────────────
+    function initScrollPathFlight() {
+      const plane = document.getElementById('scroll-flight-plane');
+      const path = document.querySelector('.scroll-flight-path-svg path');
+      const container = document.querySelector('.scroll-flight-container');
+      if (!plane || !path || !container) return;
+
+      const pathLength = path.getTotalLength();
+
+      function updatePlane() {
+        const rect = container.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        
+        if (rect.top > viewportHeight || rect.bottom < 0) return;
+        
+        const startY = rect.top - viewportHeight;
+        const range = rect.height + viewportHeight;
+        
+        const progress = Math.min(Math.max(-startY / range, 0), 1);
+        const point = path.getPointAtLength(progress * pathLength);
+        
+        const aheadProgress = Math.min(progress + 0.005, 1);
+        const aheadPoint = path.getPointAtLength(aheadProgress * pathLength);
+        
+        const dx = aheadPoint.x - point.x;
+        const dy = aheadPoint.y - point.y;
+        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+        
+        const svgRect = path.ownerSVGElement.getBoundingClientRect();
+        const scaleX = svgRect.width / 1440;
+        const scaleY = svgRect.height / 260;
+        
+        const x = point.x * scaleX;
+        const y = point.y * scaleY;
+        
+        plane.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
+        
+        let opacity = 0;
+        if (progress > 0.02 && progress < 0.98) {
+          if (progress < 0.15) opacity = (progress - 0.02) / 0.13;
+          else if (progress > 0.85) opacity = (0.98 - progress) / 0.13;
+          else opacity = 1;
+        }
+        plane.style.opacity = opacity;
+      }
+
+      window.addEventListener('scroll', updatePlane);
+      window.addEventListener('resize', updatePlane);
+      updatePlane(); // run once
+    }
+
+    // ── Network Live Simulator ──────────────────────────────────
+    function initNetworkSimulator() {
+      const canvas = document.getElementById('network-simulator-canvas');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      
+      function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = 320;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const nodes = [
+        { id: 'JFK', name: 'New York', x: 0.28, y: 0.35, type: 'hub' },
+        { id: 'LAX', name: 'Los Angeles', x: 0.15, y: 0.42, type: 'hub' },
+        { id: 'LHR', name: 'London', x: 0.48, y: 0.25, type: 'hub' },
+        { id: 'CDG', name: 'Paris', x: 0.51, y: 0.28, type: 'international' },
+        { id: 'DXB', name: 'Dubai', x: 0.65, y: 0.45, type: 'hub' },
+        { id: 'SIN', name: 'Singapore', x: 0.82, y: 0.65, type: 'hub' },
+        { id: 'NRT', name: 'Tokyo', x: 0.90, y: 0.38, type: 'hub' },
+        { id: 'SYD', name: 'Sydney', x: 0.92, y: 0.82, type: 'international' },
+        { id: 'JNB', name: 'Johannesburg', x: 0.58, y: 0.75, type: 'national' },
+        { id: 'GRU', name: 'Sao Paulo', x: 0.35, y: 0.72, type: 'national' }
+      ];
+
+      const typeColor = {
+        hub: '#0ea5e9',
+        international: '#8b5cf6',
+        national: '#10b981'
+      };
+
+      const activeFlights = [];
+      const landingRipples = [];
+
+      function spawnFlight() {
+        if (activeFlights.length > 8) return;
+        const origin = nodes[Math.floor(Math.random() * nodes.length)];
+        let dest = nodes[Math.floor(Math.random() * nodes.length)];
+        while (dest.id === origin.id) {
+          dest = nodes[Math.floor(Math.random() * nodes.length)];
+        }
+
+        activeFlights.push({
+          origin,
+          dest,
+          progress: 0,
+          speed: 0.006 + Math.random() * 0.008,
+          color: typeColor[origin.type],
+          arch: -40 - Math.random() * 60
+        });
+      }
+
+      function drawBackgroundGrid() {
+        ctx.strokeStyle = getTheme() === 'dark' ? 'rgba(47, 42, 87, 0.12)' : 'rgba(235, 220, 201, 0.3)';
+        ctx.lineWidth = 1;
+        const step = 20;
+        
+        for (let y = step; y < canvas.height; y += step) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(canvas.width, y);
+          ctx.stroke();
+        }
+        
+        for (let x = step; x < canvas.width; x += step) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, canvas.height);
+          ctx.stroke();
+        }
+      }
+
+      function getBezierPoint(p0, p1, p2, t) {
+        const x = (1 - t) * (1 - t) * p0.x + 2 * (1 - t) * t * p1.x + t * t * p2.x;
+        const y = (1 - t) * (1 - t) * p0.y + 2 * (1 - t) * t * p1.y + t * t * p2.y;
+        return { x, y };
+      }
+
+      function tick() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        drawBackgroundGrid();
+
+        if (Math.random() < 0.02) {
+          spawnFlight();
+        }
+
+        const w = canvas.width;
+        const h = canvas.height;
+
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = getTheme() === 'dark' ? 'rgba(255, 255, 255, 0.02)' : 'rgba(0, 0, 0, 0.02)';
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x * w, nodes[i].y * h);
+            ctx.lineTo(nodes[j].x * w, nodes[j].y * h);
+            ctx.stroke();
+          }
+        }
+
+        for (let i = activeFlights.length - 1; i >= 0; i--) {
+          const f = activeFlights[i];
+          f.progress += f.speed;
+
+          const p0 = { x: f.origin.x * w, y: f.origin.y * h };
+          const p2 = { x: f.dest.x * w, y: f.dest.y * h };
+          const p1 = {
+            x: (p0.x + p2.x) / 2,
+            y: (p0.y + p2.y) / 2 + f.arch
+          };
+
+          ctx.beginPath();
+          ctx.moveTo(p0.x, p0.y);
+          ctx.quadraticCurveTo(p1.x, p1.y, p2.x, p2.y);
+          ctx.lineWidth = 1.5;
+          ctx.strokeStyle = f.color + '1c';
+          ctx.stroke();
+
+          ctx.beginPath();
+          const tailProgress = Math.max(0, f.progress - 0.15);
+          const startPt = getBezierPoint(p0, p1, p2, tailProgress);
+          const endPt = getBezierPoint(p0, p1, p2, Math.min(1, f.progress));
+          
+          const grad = ctx.createLinearGradient(startPt.x, startPt.y, endPt.x, endPt.y);
+          grad.addColorStop(0, 'transparent');
+          grad.addColorStop(1, f.color);
+          
+          ctx.moveTo(startPt.x, startPt.y);
+          ctx.quadraticCurveTo(
+            getBezierPoint(p0, p1, p2, (tailProgress + f.progress) / 2).x,
+            getBezierPoint(p0, p1, p2, (tailProgress + f.progress) / 2).y,
+            endPt.x, endPt.y
+          );
+          ctx.lineWidth = 2.5;
+          ctx.strokeStyle = grad;
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.arc(endPt.x, endPt.y, 4, 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.shadowColor = f.color;
+          ctx.shadowBlur = 8;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+
+          if (f.progress >= 1) {
+            landingRipples.push({
+              x: p2.x,
+              y: p2.y,
+              size: 2,
+              maxSize: 28,
+              color: f.color,
+              alpha: 0.8
+            });
+            activeFlights.splice(i, 1);
+          }
+        }
+
+        for (let i = landingRipples.length - 1; i >= 0; i--) {
+          const r = landingRipples[i];
+          r.size += 0.8;
+          r.alpha = 1 - (r.size / r.maxSize);
+
+          ctx.beginPath();
+          ctx.arc(r.x, r.y, r.size, 0, Math.PI * 2);
+          ctx.strokeStyle = r.color + Math.floor(r.alpha * 255).toString(16).padStart(2, '0');
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+
+          if (r.size >= r.maxSize) {
+            landingRipples.splice(i, 1);
+          }
+        }
+
+        for (const n of nodes) {
+          const nx = n.x * w;
+          const ny = n.y * h;
+          const color = typeColor[n.type];
+
+          ctx.beginPath();
+          ctx.arc(nx, ny, 4.5, 0, Math.PI * 2);
+          ctx.fillStyle = color;
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(nx, ny, 8, 0, Math.PI * 2);
+          ctx.strokeStyle = color + '33';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          ctx.fillStyle = getTheme() === 'dark' ? 'rgba(154, 149, 184, 0.85)' : 'rgba(71, 85, 105, 0.85)';
+          ctx.font = 'bold 9px Inter, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(n.id, nx, ny - 12);
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      for (let i = 0; i < 4; i++) {
+        spawnFlight();
+        activeFlights[i].progress = Math.random() * 0.8;
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initHeroParallax();
+      initScrollPathFlight();
+      initNetworkSimulator();
+    });
+  </script>
 </body>
 </html>
