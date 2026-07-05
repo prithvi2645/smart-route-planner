@@ -33,11 +33,18 @@ function buildNavbar(activePage) {
   const pages = [
     { href: 'index.html',     label: 'Home' },
     { href: 'dashboard.html', label: 'Dashboard' },
+    { href: 'index.html#features', label: 'Features' },
+    { href: 'index.html#networks', label: 'Networks' },
   ];
 
   const links = pages.map(p => {
+    let href = p.href;
+    if (activePage === 'index.html') {
+      if (p.href === 'index.html#features') href = '#features';
+      if (p.href === 'index.html#networks') href = '#networks';
+    }
     const isActive = activePage === p.href;
-    return `<a href="${p.href}" class="nav-link${isActive ? ' active' : ''}">${p.label}</a>`;
+    return `<a href="${href}" class="nav-link${isActive ? ' active' : ''}">${p.label}</a>`;
   }).join('');
 
   const authSection = user
@@ -67,13 +74,13 @@ function buildNavbar(activePage) {
         <a href="signup.html" class="btn btn-primary btn-sm">Get Started</a>
        </div>`;
 
-  const brandPlane = `<svg class="icon-svg" viewBox="0 0 100 100" style="width:18px;height:18px;stroke:none;fill:#fff"><path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" /></svg>`;
+  const brandPlane = `<svg class="icon-svg" viewBox="0 0 100 100" style="width:22px;height:22px;stroke:none;fill:var(--primary);margin-right:2px"><path d="M50 5 L55 25 L85 55 L85 65 L55 50 L55 80 L68 90 L68 95 L50 90 L32 95 L32 90 L45 80 L45 50 L15 65 L15 55 L45 25 Z" /></svg>`;
 
   return `
     <nav class="navbar" id="navbar">
       <div class="container nav-inner">
         <a href="index.html" class="nav-brand">
-          <div class="brand-icon">${brandPlane}</div>
+          ${brandPlane}
           Sky<span class="text-primary">Route</span>
         </a>
         <div class="nav-links" id="nav-links">${links}</div>
@@ -86,7 +93,14 @@ function buildNavbar(activePage) {
         </div>
       </div>
       <div class="mobile-menu hidden" id="mobile-menu">
-        ${pages.map(p => `<a href="${p.href}" class="mobile-link${activePage === p.href ? ' active' : ''}">${p.label}</a>`).join('')}
+        ${pages.map(p => {
+          let href = p.href;
+          if (activePage === 'index.html') {
+            if (p.href === 'index.html#features') href = '#features';
+            if (p.href === 'index.html#networks') href = '#networks';
+          }
+          return `<a href="${href}" class="mobile-link${activePage === p.href ? ' active' : ''}" onclick="toggleMobileMenu()">${p.label}</a>`;
+        }).join('')}
         ${user
           ? `<button class="mobile-link danger" onclick="logout()" style="display:flex;align-items:center;gap:6px">
               <svg class="icon-svg" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
